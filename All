@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>切版練習</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      :root {
+        --primary-color: rgb(224, 47, 136);
+        --primary-hover-color: rgb(168, 18, 93);
+      }
+      body {
+        background: #eee;
+      }
+      .displayOnPhone {
+        display: none;
+      }
+      @media screen and (max-width: 768px) {
+        .displayOnComputer {
+          display: none;
+        }
+        .displayOnPhone {
+          display: block;
+        }
+      }
+      .main-nav {
+        background: #fff;
+        padding: 10px 0;
+      }
+      .main-nav li a {
+        display: block;
+        color: #333;
+        padding: 10px 16px;
+        text-decoration: none;
+      }
+      .logo {
+        height: 36px;
+      }
+      .setting-btn {
+        width: 64px;
+        height: 100%;
+        background: url("images/setting.png") left center;
+      }
+      .phoneNav {
+        width: 90%;
+        height: 100%;
+        margin: 0 auto;
+      }
+      .phoneMenu {
+        background: url("images/menu.svg") center;
+        background-repeat: no-repeat;
+        width: 36px;
+        height: 36px;
+        cursor: pointer;
+        z-index: 3;
+      }
+      .phoneMenuSpread {
+        /* top: 56px; */
+        /* right: -100px; */
+        top: -270px;
+        right: 0px;
+        background: rgba(255, 255, 255, 0.9);
+        z-index: 1;
+        transition: 0.4s;
+        /* display: none; */
+      }
+      .none {
+        display: block;
+        /* transform: translateX(-100px); */
+        transform: translateY(326px);
+      }
+      .phoneMenuSpread li {
+        border-bottom: 1px solid #111;
+      }
+      .phoneMenuSpread li a {
+        width: 100px;
+      }
+      .hero {
+        /* height: 80vh; */
+        background: url("images/long-hair.jpg") center center;
+        background-size: cover;
+        position: relative;
+      }
+      .hero-mask {
+        background: rgba(0, 0, 0, 0.7);
+        height: 100%;
+        width: 100%;
+        position: absolute;
+      }
+      .hero-logo {
+        width: 35%;
+      }
+      .search-block {
+        border: 1px solid var(--primary-color);
+        padding: 2px;
+        background: rgba(0, 0, 0, 0.7);
+        max-width: 560px;
+        margin: 0 auto;
+      }
+      .search-block div:first-child {
+        display: flex;
+        align-items: center;
+        border-right: 1px solid var(--primary-color);
+        padding-right: 10px;
+      }
+      .search-text {
+        flex-grow: 1;
+        margin: 0 5px;
+        height: 37px;
+      }
+      .search-block input[type="text"] {
+        height: 100%;
+        width: 100%;
+        background: transparent;
+        border: none;
+      }
+      .btn-primary {
+        background: var(--primary-color);
+        border-radius: 0;
+        border: none;
+      }
+      .btn-primary:hover {
+        background: var(--primary-hover-color);
+      }
+      /**/
+      .slogan {
+        margin-top: 50px;
+        padding: 40px 0;
+        background: url("images/bg_icon.png");
+        /* height: 200px; */
+      }
+      @media screen and (max-width: 768px) {
+        .search-block {
+          flex-wrap: wrap;
+          margin-bottom: 80px;
+        }
+        .search-block .btn {
+          width: 100%;
+          position: absolute;
+          top: 46px;
+          left: 0.5px;
+        }
+      }
+      /* .borderBottomLine {
+        height: 2px;
+        width: 30px;
+        border: 2px solid #000;
+        border-radius: 20%;
+      } */
+      /*標題下底線開始*/
+      .titleBorder::after {
+        content: "";
+        display: block;
+        width: 32px;
+        border: 2px solid #000;
+        border-radius: 20%;
+        margin: 3px auto 0;
+      }
+      .titleBorderAd::after {
+        content: "";
+        display: block;
+        width: 32px;
+        border: 2px solid #000;
+        border-radius: 20%;
+        margin: 3px 81px 0;
+      }
+      .titleBorderWhite::after {
+        content: "";
+        display: block;
+        width: 30px;
+        border: 2px solid #fff;
+        border-radius: 20%;
+        margin: 3px auto 0;
+      }
+      /*標題下底線結束*/
+      .forHotIssue {
+        margin: -22px auto 20px;
+      }
+      .hotIssueImg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .hotIssueP {
+        border: 1px solid var(--primary-color);
+        background: rgba(255, 255, 255, 0.8);
+        width: 100px;
+        position: absolute;
+        right: 0px;
+        bottom: 1px;
+        color: var(--primary-color);
+      }
+      .more {
+        background: var(--primary-color);
+        width: 60px;
+        position: absolute;
+        right: 13px;
+        bottom: -30px;
+        padding: 2px;
+      }
+      .more a {
+        text-decoration: none;
+        color: #fff;
+      }
+      /* .forTrend {
+        margin: -5px auto 20px;
+      } */
+      .popularDesigner {
+        display: none;
+      }
+      .forPopular {
+        margin: -5px auto 20px;
+      }
+      @media screen and (max-width: 768px) {
+        .hotIssue > div {
+          margin-top: 10px;
+        }
+      }
+      .profile {
+        border-radius: 50%;
+        width: 220px;
+        height: 220px;
+        overflow: hidden;
+        margin: 10px 0;
+      }
+      .profile img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .profileP {
+        color: #fff;
+        text-shadow: 0 0 3px #000;
+        position: absolute;
+        bottom: 10px;
+      }
+      .p1 {
+        left: 75px;
+      }
+      .p2 {
+        left: 80px;
+      }
+      .p3 {
+        left: 100px;
+      }
+      .p4 {
+        left: 65px;
+      }
+      /* 人氣設計師結束 */
+      .trendImg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .trendP {
+        position: absolute;
+        top: calc(50% - 12px);
+        left: calc(50% - 125px);
+        color: #fff;
+        text-shadow: 0px 0px 10px #111;
+      }
+      @media screen and (max-width: 768px) {
+        .trend {
+          height: 200px;
+          overflow: hidden;
+          margin-top: 10px;
+        }
+
+        .hotMask {
+          position: absolute;
+          width: calc(100% - 24px);
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          top: 0px;
+        }
+      }
+      .pageAdvertiserBackGround {
+        background: #ddd;
+      }
+      .pageAdvertiser {
+        width: 600px;
+        margin: 0 auto;
+      }
+      .phone {
+        margin: 0 -80px 0 0;
+        width: auto;
+      }
+      /* .forAdvertiser {
+        margin: -5px 79px 30px;
+      } */
+      .advertiserSub {
+        margin: auto 0;
+      }
+      .getOnPhone {
+        width: 180px;
+      }
+      .advertiserSubP {
+        color: var(--primary-color);
+      }
+      @media screen and (max-width: 768px) {
+        .pageAdvertiser {
+          width: 100%;
+        }
+        .advertiserSub {
+          text-align: center;
+          color: #444;
+        }
+        /* .forAdvertiser {
+          margin: -5px auto 5px;
+        } */
+        .phoneDownload {
+          flex-wrap: wrap;
+        }
+        .getOnPhone {
+          margin: 0 auto;
+        }
+        .getOnPhone img {
+          width: 100%;
+        }
+        .advertiserSubP {
+          display: none;
+        }
+      }
+      .recruitingBackGround {
+        background: url("images/01.jpg") center left;
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 0.8;
+        filter: blur(3px);
+        position: absolute;
+        width: 100%;
+        height: 220px;
+      }
+      .recruitingP {
+        width: 500px;
+        margin: 0 auto;
+      }
+      .recruitingP p {
+        text-shadow: 0 0 3px #222;
+        margin: 10px;
+      }
+      .dashed {
+        width: 2px;
+        height: 80px;
+        border-right: 1px dashed #fff;
+        margin: auto 0;
+      }
+      .recruitingP strong {
+        font-size: 64px;
+      }
+      /* .forRecruiting {
+        border: 2px solid #fff;
+        margin: -5px 92px 30px;
+      } */
+      .recruitingBtn {
+        margin: 5px;
+        padding: 5px;
+        background: rgba(255, 255, 255, 0.5);
+        height: 35px;
+      }
+      .recruitingBtn a {
+        padding: 0 35px;
+        text-decoration: none;
+        color: #444;
+      }
+      @media screen and (max-width: 768px) {
+        .recruitingP {
+          flex-wrap: wrap;
+        }
+        .recruitingP div {
+          width: 100%;
+        }
+        .recruitingBackGround {
+          height: 455px;
+        }
+        .dashed {
+          display: none;
+        }
+        .recruitingP2 {
+          flex-wrap: wrap;
+          text-align: center;
+        }
+        .recruitingP2 > div {
+          width: 100%;
+        }
+        .forRecruiting {
+          margin: auto;
+        }
+        .recruitingBtnContainer {
+          justify-content: center;
+        }
+        .recruitingBtn {
+          padding: 5px 30px;
+          margin: 20px 10px 30px;
+        }
+      }
+      .footerBackGround {
+        background: #ddd;
+        color: #444;
+      }
+      .footerContainer {
+        margin: 0 auto;
+        width: 880px;
+      }
+      .footerIcon {
+        width: 50px;
+        height: 50px;
+      }
+      .footerContainer a {
+        text-decoration: none;
+        color: #444;
+      }
+      .footerJoinUs a {
+        color: var(--primary-color);
+        margin: 0 0 0 50px;
+      }
+      .footerJoinUsP {
+        position: absolute;
+        width: 145px;
+        top: -10px;
+        right: -16px;
+      }
+      .borderTopLine {
+        border-top: 1px solid #444;
+        width: 90%;
+        margin: 20px auto 0;
+      }
+      .allRights {
+        display: none;
+      }
+      @media screen and (max-width: 768px) {
+        .footerContainer {
+          width: auto;
+        }
+        .footerContainer > div {
+          flex-wrap: wrap;
+          width: 100%;
+          text-align: center;
+          justify-content: center;
+        }
+        .footerList {
+          justify-content: space-around;
+          width: 100%;
+          text-align: start;
+        }
+        .footerJoinUsP {
+          left: 0px;
+          margin: auto;
+        }
+        .footerJoinUs {
+          /* width: 100px; */
+          margin: auto;
+        }
+        .allRights {
+          display: inline-block;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="main-nav">
+      <!--電腦版主選單-->
+      <div class="container displayOnComputer">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex">
+            <a href="#"><img class="logo" src="images/logo.png" alt="HairMap" title="HairMap 美髮地圖" /></a>
+            <ul class="list-unstyled d-flex m-0">
+              <li><a href="">找髮型</a></li>
+              <li><a href="">找設計師</a></li>
+              <li><a href="">美髮誌</a></li>
+            </ul>
+          </div>
+          <div class="d-flex">
+            <ul class="list-unstyled d-flex m-0">
+              <li><a href="">註冊</a></li>
+              <li><a href="">登入</a></li>
+              <li><a class="setting-btn"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--手機板主選單-->
+      <div class="displayOnPhone phoneNav">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex justify-content-between">
+            <a href="#"><img class="logo" src="images/logo.png" alt="HairMap" /></a>
+          </div>
+          <div class="phoneMenu" id="phoneMenu">
+            <!--123-->
+            <ul class="position-absolute phoneMenuSpread list-unstyled text-center" id="phoneMenuSpread">
+              <li><a href="#">登入</a></li>
+              <li><a href="#">註冊</a></li>
+              <li><a href="#">找髮型</a></li>
+              <li><a href="#">找設計師</a></li>
+              <li><a href="#">美髮誌</a></li>
+              <li><a href="#">設定</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!--選單結束-->
+    <div class="hero">
+      <div class="hero-mask"></div>
+      <div class="container position-relative">
+        <div class="text-center py-3">
+          <img class="hero-logo" src="images/logo_icon_g.svg" alt="/" />
+          <h1 class="text-white py-2 displayOnComputer" id="worried">煩惱髮型嗎</h1>
+          <h1 class="text-white py-2 displayOnPhone">簡單預約 隨時有型</h1>
+          <h2 class="text-white h5">給你最多髮型靈感及在地優秀設計師</h2>
+        </div>
+        <div class="search-block d-flex position-relative">
+          <div class="text-white">
+            <img src="images/icon_searchbar_location.png" alt="/" />
+            找地區
+          </div>
+          <div class="search-text">
+            <input type="text" />
+          </div>
+          <button class="btn btn-primary">
+            <img src="images/icon_searchbar_search.png" alt="/" />
+            去逛逛
+          </button>
+        </div>
+      </div>
+      <div class="slogan position-relative">
+        <div class="container">
+          <div class="row text-white justify-content-center text-center">
+            <div class="col-lg-3 my-3 my-lg-0">
+              <img src="images/icon_search.png" alt="/" />
+              <h5 class="displayOnComputer">在地設計師<br />輕鬆找</h5>
+              <h5 class="displayOnPhone">設計師作品<br />輕鬆找</h5>
+            </div>
+            <div class="col-lg-3 my-3 my-lg-0">
+              <img src="images/icon_fashion.png" alt="/" />
+              <h5>流行髮型<br />一手掌握</h5>
+            </div>
+            <div class="col-lg-3 my-3 my-lg-0">
+              <img src="images/icon_book.png" alt="/" />
+              <h5 class="displayOnComputer">即時溝通預約</h5>
+              <h5 class="displayOnPhone">即時溝通<br />快速預約</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <main>
+      <div class="container my-4">
+        <div class="text-center justify-content-center">
+          <!--熱門主題的四個區塊-->
+          <h3 class="py-3 displayOnComputer titleBorder">熱門主題</h3>
+          <h3 class="py-3 displayOnPhone titleBorder">熱門髮型</h3>
+          <!-- <div class="borderBottomLine forHotIssue"></div> -->
+          <div class="row position-relative hotIssue">
+            <div class="col-md-3 col-6 position-relative">
+              <img class="hotIssueImg" src="images/3425_14.jpg" alt="/" />
+              <p class="hotIssueP">戴帽子</p>
+            </div>
+            <div class="col-md-3 col-6 position-relative">
+              <img class="hotIssueImg" src="images/9743_2.jpg" alt="/" />
+              <p class="hotIssueP">褐色系</p>
+            </div>
+            <div class="col-md-3 col-6 position-relative">
+              <img class="hotIssueImg" src="images/22736_8.jpg" alt="/" />
+              <p class="hotIssueP">棕色系</p>
+            </div>
+            <div class="col-md-3 col-6 position-relative">
+              <img class="hotIssueImg" src="images/06.jpg" alt="/" />
+              <p class="hotIssueP">髒辮</p>
+            </div>
+            <div class="more"><a href="">more</a></div>
+          </div>
+        </div>
+        <div class="container my-5 text-center displayOnPhone">
+          <!--人氣設計師-->
+          <h3 class="titleBorder">人氣設計師</h3>
+          <!-- <div class="borderBottomLine forPopular"></div> -->
+          <div class="row position-relative">
+            <div class="col-6">
+              <div class="profile position-relative">
+                <img src="images/03.jpg" alt="/" />
+                <p class="profileP p1">Angus怡龍</p>
+              </div>
+              <p>40則貼文<br />65人追蹤</p>
+            </div>
+            <div class="col-6">
+              <div class="profile position-relative">
+                <img src="images/02.jpg" alt="/" />
+                <p class="profileP p2">Ian Chao</p>
+              </div>
+              <p>88則貼文<br />172人追蹤</p>
+            </div>
+            <div class="col-6">
+              <div class="profile position-relative">
+                <img src="images/04.jpg" alt="/" />
+                <p class="profileP p3">阿毛</p>
+              </div>
+              <p>33則貼文<br />87人追蹤</p>
+            </div>
+            <div class="col-6">
+              <div class="profile position-relative">
+                <img src="images/14366_18.jpg" alt="/" />
+                <p class="profileP p4">Ethan Chang</p>
+              </div>
+              <p>81則貼文<br />57人追蹤</p>
+            </div>
+            <div class="more"><a href="/">more</a></div>
+          </div>
+        </div>
+        <div class="text-center my-5">
+          <!--趨勢話題的三個區塊-->
+          <h3 class="titleBorder">趨勢話題</h3>
+          <!-- <div class="borderBottomLine forTrend"></div> -->
+          <div class="row position-relative">
+            <div class="col-lg-4 position-relative trend">
+              <div class="hotMask"></div>
+              <img class="trendImg displayOnComputer" src="images/9344.jpg" alt="/" />
+              <p class="trendP displayOnComputer">鬆感的劉海！配上極捲的捲度！反而...</p>
+              <img class="trendImg displayOnPhone" src="images/05.jpg" alt="/" />
+              <p class="trendP displayOnPhone">2017男士Undercut帥氣精選</p>
+            </div>
+            <div class="col-lg-4 position-relative trend">
+              <div class="hotMask"></div>
+              <img class="trendImg" src="images/128141.jpg" alt="/" />
+              <p class="trendP displayOnComputer">日系鬆鬆捲度 吹乾即可 霧面髮色</p>
+              <p class="trendP displayOnPhone">IG時尚達人瘋狂的虎眼石髮色</p>
+            </div>
+            <div class="col-lg-4 position-relative trend">
+              <div class="hotMask"></div>
+              <img class="trendImg" src="images/141965.jpg" alt="/" />
+              <p class="trendP displayOnComputer">歐爸新寵，括號瀏海你跟風了嗎？</p>
+              <p class="trendP displayOnPhone">韓妞風潮 十大韓系髮型強勢來襲</p>
+            </div>
+            <div class="more"><a href="">more</a></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="pageAdvertiserBackGround">
+      <!--廣告-->
+      <div class="pageAdvertiser">
+        <div class="row">
+          <div class="col-6 phone">
+            <img src="images/phones.png" alt="/" />
+          </div>
+          <div class="col-6 advertiserSub">
+            <h3 class="displayOnComputer titleBorderAd">快速找到好髮型</h3>
+            <h3 class="displayOnPhone h1 titleBorder">快速預約好髮型</h3>
+            <!-- <div class="borderBottomLine forAdvertiser"></div> -->
+            <div class="d-flex phoneDownload">
+              <div class="getOnPhone">
+                <a href="/"><img src="images/btn_app_ios.png" alt="/" /></a>
+              </div>
+              <div class="getOnPhone">
+                <a href="/"><img src="images/btn_app_android.png" alt="/" /></a>
+              </div>
+            </div>
+            <div>
+              <p class="advertiserSubP">下載並註冊後就可以開始發表作品囉！</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-white">
+      <!--招募-->
+      <div class="recruitingBackGround"></div>
+      <div class="position-relative">
+        <div class="d-flex text-center justify-content-around recruitingP">
+          <div>
+            <p class="displayOnComputer">已有<br /><strong>635</strong><br />位設計師</p>
+            <p class="displayOnPhone">已有<br /><strong>3220</strong><br />位設計師</p>
+          </div>
+          <div class="dashed"></div>
+          <div>
+            <p class="displayOnComputer">發表<br /><strong>6421</strong><br />張髮型作品</p>
+            <p class="displayOnPhone">發表<br /><strong>92485</strong><br />張髮型作品</p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center recruitingP2">
+          <div>
+            <h3 class="titleBorderWhite">優秀設計師募集中</h3>
+            <!-- <div class="borderBottomLine forRecruiting"></div> -->
+          </div>
+          <div class="text-black-50 d-flex recruitingBtnContainer">
+            <div class="recruitingBtn">
+              <a href="">了解更多</a>
+            </div>
+            <div class="recruitingBtn">
+              <a href="">立即免費註冊</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footerBackGround">
+      <div class="footerContainer">
+        <div class="d-flex">
+          <div class="d-flex my-3">
+            <img class="footerIcon" src="images/logo_icon_g.svg" alt="/" />
+            HairMap美髮地圖團隊致力於打造出最貼心實用的美髮資訊交流<br />
+            社群，讓美髮時光成為每個人生命中的美好時刻。
+          </div>
+          <div class="footerList d-flex">
+            <ul class="my-3 mx-2 list-unstyled">
+              <li>
+                <a href="/"><img src="images/email.svg" alt="/" />聯絡我們</a>
+              </li>
+              <li>
+                <a href="/"><img src="images/facebook_g.svg" alt="/" />粉絲專頁</a>
+              </li>
+            </ul>
+            <div class=""></div>
+            <ul class="my-3 mx-2 list-unstyled">
+              <li>
+                <a href="/"><img src="images/ios.svg" alt="/" />IOS</a>
+              </li>
+              <li>
+                <a href="/"><img src="images/android.svg" alt="/" />Android</a>
+              </li>
+            </ul>
+          </div>
+          <div class="position-relative my-4 footerJoinUs">
+            <a href="/"><img class="footerJoinUsP" src="images/btn_join.png" alt="/" />設計師加入</a>
+          </div>
+        </div>
+      </div>
+      <div class="borderTopLine"></div>
+      <p class="text-center py-3">Hairdodo Inc. &copy; 2016. All Rights Reserved <br class="allRights" />使用者條款與隱私權政策</p>
+    </footer>
+    <script>
+      let phoneMenu = document.querySelector("#phoneMenu");
+      let phoneMenuSpread = document.querySelector("#phoneMenuSpread");
+
+      phoneMenu.addEventListener("click", function () {
+        phoneMenuSpread.classList.toggle("none");
+        console.log(phoneMenuSpread.classList);
+      });
+    </script>
+  </body>
+</html>
